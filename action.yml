@@ -10,6 +10,10 @@ inputs:
     description: "The rules file to maintain (default: .llmrules)"
     required: false
     default: ".llmrules"
+  format:
+    description: "Rule output format: auto, markdown, toon, ts, yaml (default: auto)"
+    required: false
+    default: "auto"
   github_token:
     description: "GitHub token for commenting on Pull Requests"
     required: false
@@ -32,4 +36,4 @@ runs:
         GITHUB_TOKEN: ${{ inputs.github_token }}
         GEMINI_API_KEY: ${{ inputs.api_key }}
       run: |
-        uv run --project "${{ github.action_path }}" git-context action --file "${{ inputs.file }}"
+        uv run --project "${{ github.action_path }}" git-context action --file "${{ inputs.file }}" --format "${{ inputs.format }}"

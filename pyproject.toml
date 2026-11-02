@@ -18,7 +18,7 @@ dependencies = []
 
 [project.urls]
 Homepage = "https://oneorbit.dev"
-Repository = "https://github.com/oneorbit/git-context"
+Repository = "https://github.com/OneOrbit/git-context"
 
 [project.scripts]
 git-context = "git_context.cli:main"

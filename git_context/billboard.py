@@ -20,7 +20,9 @@ class BillboardGenerator:
         rules: List[str],
         conventions: List[str],
         deprecations: List[str],
-        deps: List[Dict[str, Any]]
+        deps: List[Dict[str, Any]],
+        file_name: str = ".llmrules",
+        token_info: Optional[Dict[str, Any]] = None
     ) -> str:
         """Formats an eye-catching, informative markdown summary for GitHub PR reviews."""
         lines = [
@@ -55,8 +57,14 @@ class BillboardGenerator:
             lines.extend([f"- ⚠️ {d}" for d in deprecations])
             lines.append("")
 
+        if token_info and token_info.get("savings_pct", 0) > 0:
+            fmt_desc = f"{token_info.get('format', 'TOON').upper()} format • ~{token_info.get('tokens')} tokens • {token_info.get('savings_pct')}% token savings"
+            context_note = f"> *Your AI pair programmers (Cursor, Copilot, Claude Code) now have the latest architectural rules for this PR in `{file_name}` ({fmt_desc}).*"
+        else:
+            context_note = f"> *Your AI pair programmers (Cursor, Copilot, Claude Code) now have the latest architectural rules for this PR in `{file_name}`.*"
+
         lines.extend([
-            "> *Your AI pair programmers (Cursor, Copilot, Claude Code) now have the latest architectural rules for this PR in `.llmrules`.*",
+            context_note,
             "",
             "---",
             "<sub>⚡ Maintained by **[GitContext](https://oneorbit.dev)** by [OneOrbit](https://oneorbit.dev) — Living AI context for engineering teams. Free for Open Source • $12/mo for Private Orgs.</sub>"

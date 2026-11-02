@@ -66,7 +66,25 @@ git-context init
 
 This inspects your project structure, frameworks, and dependencies, generating your initial `.llmrules`.
 
-### 4. Automatic Local Sync (Git Hook)
+### 4. Choose Your LLM-Optimized Output Format
+
+Standard Markdown wastes up to 60% of tokens on headings, bullets, and boilerplate prose. GitContext supports multiple token-dense formats specifically engineered for LLMs:
+
+```bash
+# ⚡ TOON (Token-Oriented Object Notation) — 50-70% token savings (ultra-dense)
+git-context init --format=toon
+
+# 📐 TypeScript Definition DSL (context.d.ts) — 40-50% savings + strict type adherence
+git-context init --format=ts
+
+# 📦 Compact YAML (context.yaml) — 30-40% savings (clean human + machine readable)
+git-context init --format=yaml
+
+# 📄 Standard Markdown (.llmrules) — Default traditional markdown
+git-context init --format=markdown
+```
+
+### 5. Automatic Local Sync (Git Hook)
 
 Install the automatic post-commit hook:
 
@@ -74,7 +92,7 @@ Install the automatic post-commit hook:
 git-context hook install
 ```
 
-Now, every time you make a `git commit`, GitContext will silently update `.llmrules` in under **50ms**.
+Now, every time you make a `git commit`, GitContext will silently update your living memory in under **50ms**.
 
 ---
 
@@ -84,7 +102,7 @@ This project uses `uv` exclusively for dependency and workspace management:
 
 ```bash
 # Clone the repository
-git clone https://github.com/oneorbit/git-context.git
+git clone https://github.com/OneOrbit/git-context.git
 cd git-context
 
 # Sync dependencies with uv
@@ -170,10 +188,10 @@ As an engineer, you never have to send a cold email, run ads, or jump on sales d
 
 | Command | Description |
 | :--- | :--- |
-| `git-context init` | Scans repo and creates the baseline `.llmrules` |
-| `git-context sync` | Detects changes in the latest commit and updates `.llmrules` |
-| `git-context diff` | Dry run: prints detected architectural changes to stdout without writing |
-| `git-context action` | Runs in CI mode: updates memory and posts the GitHub PR comment |
+| `git-context init [--format=toon\|ts\|yaml\|markdown]` | Scans repo and creates the baseline living memory file |
+| `git-context sync [--format=...]` | Detects changes in the latest commit and updates rules |
+| `git-context diff [--format=...]` | Dry run: prints detected changes and token benchmarks across formats |
+| `git-context action [--format=...]` | Runs in CI mode: updates memory and posts the GitHub PR comment |
 | `git-context hook install` | Installs the local Git `post-commit` automatic hook |
 
 ---

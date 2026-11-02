@@ -160,22 +160,42 @@ async def get_items(user: dict = Depends(verify_token)):
         print(f.read())
     print("----------------------------------------------------------------\n")
 
-    # Step 5: Simulate GitHub PR Billboard Comment
-    print("📢 [Step 5] Simulating the Viral Billboard PR Comment for reviewers...")
+    # Step 5: Multi-Format Token Optimization Benchmark
+    print("⚡ [Step 5] Benchmarking LLM-Optimized Formats (TOON & TypeScript DSL)...")
+    bench = store.get_token_benchmark()
+    print("📊 Token Efficiency Comparison:")
+    print(f"   • Markdown (.llmrules):   ~{bench['markdown']['tokens']} tokens (Baseline)")
+    print(f"   • TOON (.llmrules.toon):   ~{bench['toon']['tokens']} tokens (⚡ {bench['toon']['savings_pct']}% savings)")
+    print(f"   • TypeScript (context.d.ts): ~{bench['ts']['tokens']} tokens (⚡ {bench['ts']['savings_pct']}% savings)")
+    print(f"   • YAML (context.yaml):       ~{bench['yaml']['tokens']} tokens (⚡ {bench['yaml']['savings_pct']}% savings)\n")
+
+    # Generate and display TOON format
+    toon_store = MemoryStore(str(demo_dir), ".llmrules.toon", format_type="toon")
+    toon_content = toon_store.update(res3.get("rules", []), res3.get("conventions", []), res3.get("deprecations", []), commits[0])
+    print("🔬 Ultra-Dense TOON File Generated (.llmrules.toon):")
+    print("----------------------------------------------------------------")
+    print(toon_content)
+    print("----------------------------------------------------------------\n")
+
+    # Step 6: Simulate GitHub PR Billboard Comment
+    print("📢 [Step 6] Simulating the Viral Billboard PR Comment for reviewers...")
     billboard = BillboardGenerator()
+    token_info = {"format": "toon", "tokens": bench["toon"]["tokens"], "savings_pct": bench["toon"]["savings_pct"]}
     pr_comment = billboard.format_pr_comment(
         summary="Refactored API route handlers to async and enforced JWT token validation",
         rules=res3.get("rules", []),
         conventions=res3.get("conventions", []),
         deprecations=res3.get("deprecations", []),
-        deps=deps
+        deps=deps,
+        file_name=".llmrules.toon",
+        token_info=token_info
     )
 
     print("💬 Markdown that gets posted to the GitHub Pull Request:")
     print("================================================================")
     print(pr_comment)
     print("================================================================\n")
-    print("🎉 SIMULATION COMPLETE: All architectural changes automatically tracked!")
+    print("🎉 SIMULATION COMPLETE: All architectural changes automatically tracked across formats!")
 
 if __name__ == "__main__":
     run_simulation()
