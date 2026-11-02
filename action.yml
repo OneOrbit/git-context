@@ -21,17 +21,15 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Set up Python
-      uses: actions/setup-python@v5
+    - name: Set up uv
+      uses: astral-sh/setup-uv@v5
       with:
-        python-version: "3.x"
+        enable-cache: true
 
-    - name: Run GitContext Action
+    - name: Run GitContext Action via uv
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github_token }}
         GEMINI_API_KEY: ${{ inputs.api_key }}
       run: |
-        python3 -m pip install -q setuptools
-        python3 -m pip install -q -e ${{ github.action_path }}
-        git-context action --file "${{ inputs.file }}"
+        uv run --project "${{ github.action_path }}" git-context action --file "${{ inputs.file }}"

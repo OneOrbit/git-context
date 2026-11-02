@@ -105,6 +105,13 @@ class GitAnalyzer:
                 if m:
                     action = "added" if line_str.startswith("+") else "removed"
                     deps.append({"name": m.group(1), "version": m.group(2), "action": action, "type": "npm"})
+
+            # Python pyproject.toml dependencies: +"package>=version",
+            elif (line_str.startswith('+"') or line_str.startswith('-"')) and not '": "' in line_str:
+                m = re.match(r'^[+-]\s*"([a-zA-Z0-9_\-]+)(?:[=<>~]=?[0-9a-zA-Z._\-]+)?",?', line_str)
+                if m:
+                    action = "added" if line_str.startswith("+") else "removed"
+                    deps.append({"name": m.group(1), "action": action, "type": "python"})
             
             # Python requirements.txt
             if (line_str.startswith('+') or line_str.startswith('-')) and not line_str.startswith('+++') and not line_str.startswith('---'):

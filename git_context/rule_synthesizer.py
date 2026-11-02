@@ -66,6 +66,8 @@ class RuleSynthesizer:
             conventions.append("Backend Framework: FastAPI with async route definitions")
         if any("pydantic" in p for p in file_paths) or "pydantic" in diff_lower or "basemodel" in diff_lower:
             conventions.append("Data Validation: Use Pydantic models for request/response payloads")
+        if any("uv.lock" in p or "pyproject.toml" in p for p in file_paths) or "tool.uv" in diff_lower:
+            conventions.append("Packaging & Tooling: uv package manager with standard pyproject.toml")
         if any("sqlalchemy" in diff_lower or "alembic" in p for p in file_paths):
             conventions.append("Database / ORM: SQLAlchemy models with Alembic database migrations")
         if any(p.endswith(".tsx") or p.endswith(".jsx") for p in file_paths):

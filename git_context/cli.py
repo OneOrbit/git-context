@@ -171,8 +171,12 @@ def cmd_hook_install(args):
 
     hook_file = os.path.join(hook_dir, "post-commit")
     script = """#!/usr/bin/env bash
-# GitContext Auto-Sync Hook
-git-context sync > /dev/null 2>&1 &
+# GitContext Auto-Sync Hook (supports global binary or uv run)
+if command -v git-context >/dev/null 2>&1; then
+    git-context sync > /dev/null 2>&1 &
+elif command -v uv >/dev/null 2>&1; then
+    uv run git-context sync > /dev/null 2>&1 &
+fi
 """
     with open(hook_file, "w") as f:
         f.write(script)

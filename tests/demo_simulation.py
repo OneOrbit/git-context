@@ -45,7 +45,15 @@ class Item(BaseModel):
 def get_items():
     return [{'name': 'Laptop', 'price': 999.0}]
 """)
-    (demo_dir / "requirements.txt").write_text("fastapi==0.110.0\npydantic==2.6.4\nuvicorn==0.28.0\n")
+    (demo_dir / "pyproject.toml").write_text("""[project]
+name = "demo-service"
+version = "0.1.0"
+dependencies = [
+    "fastapi>=0.110.0",
+    "pydantic>=2.6.4",
+    "uvicorn>=0.28.0",
+]
+""")
 
     run_cmd("git add .", cwd=demo_dir)
     run_cmd('git commit -m "feat: initial fastapi microservice setup"', cwd=demo_dir)
@@ -89,8 +97,17 @@ def verify_token(credentials: HTTPAuthorizationCredentials = Security(security))
         raise HTTPException(status_code=401, detail='Invalid Bearer Token')
     return {'sub': 'user-123'}
 """)
-    # Add JWT to requirements.txt
-    (demo_dir / "requirements.txt").write_text("fastapi==0.110.0\npydantic==2.6.4\nuvicorn==0.28.0\npyjwt==2.8.0\n")
+    # Add JWT to pyproject.toml
+    (demo_dir / "pyproject.toml").write_text("""[project]
+name = "demo-service"
+version = "0.1.0"
+dependencies = [
+    "fastapi>=0.110.0",
+    "pydantic>=2.6.4",
+    "uvicorn>=0.28.0",
+    "pyjwt>=2.8.0",
+]
+""")
 
     run_cmd("git add .", cwd=demo_dir)
     run_cmd('git commit -m "feat(auth): introduce jwt bearer token security layer"', cwd=demo_dir)

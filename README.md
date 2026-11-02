@@ -4,6 +4,7 @@
 > *Keeps `.llmrules` and `.cursorrules` continuously updated from Git diffs so Cursor, Claude Code, Copilot, and Antigravity never hallucinate outdated conventions.*
 
 [![GitHub Action](https://img.shields.io/badge/GitHub_Action-Marketplace-blue.svg)](https://github.com/marketplace/actions/gitcontext)
+[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
@@ -31,7 +32,7 @@ GitContext hooks into your Git workflow (either locally as a Git hook or automat
                       Directory Shifts)       Token-Dense Rules) Copilot, & Claude)
 ```
 
-1. **Diff Analysis:** Scans code changes, dependency shifts (`package.json`, `requirements.txt`), new directory namespaces, and commit messages.
+1. **Diff Analysis:** Scans code changes, dependency shifts (`package.json`, `requirements.txt`, `pyproject.toml`), new directory namespaces, and commit messages.
 2. **Architectural Distillation:** Extracts concrete conventions (e.g., *"Use async FastAPI handlers"*, *"Authentication uses JWT Bearer tokens in `app/auth.py`"*).
 3. **Token-Budget Pruning:** Maintains `.llmrules` under an ultra-dense token budget so it never bloats your AI prompt context window.
 4. **Viral PR Review Billboard:** When run in GitHub Actions, it posts a clear summary comment on every pull request, informing reviewers that AI context has been updated.
@@ -40,15 +41,23 @@ GitContext hooks into your Git workflow (either locally as a Git hook or automat
 
 ## 🚀 Quick Start (Local CLI)
 
-### 1. Installation
+Managed 100% via [`uv`](https://github.com/astral-sh/uv) — ultra-fast, zero-hassle execution with no manual venv management.
 
-Install via pip:
+### 1. Run Instantly (No Installation Needed)
+
+You can run GitContext directly with `uvx`:
 
 ```bash
-pip install git-context
+uvx git-context init
 ```
 
-### 2. Initialize in your Repository
+### 2. Or Install as a Global Tool
+
+```bash
+uv tool install git-context
+```
+
+### 3. Initialize in your Repository
 
 ```bash
 cd your-project-repo
@@ -57,7 +66,7 @@ git-context init
 
 This inspects your project structure, frameworks, and dependencies, generating your initial `.llmrules`.
 
-### 3. Automatic Local Sync (Git Hook)
+### 4. Automatic Local Sync (Git Hook)
 
 Install the automatic post-commit hook:
 
@@ -66,6 +75,28 @@ git-context hook install
 ```
 
 Now, every time you make a `git commit`, GitContext will silently update `.llmrules` in under **50ms**.
+
+---
+
+## 🛠️ Local Development & Testing
+
+This project uses `uv` exclusively for dependency and workspace management:
+
+```bash
+# Clone the repository
+git clone https://github.com/gitcontext/git-context.git
+cd git-context
+
+# Sync dependencies with uv
+uv sync
+
+# Run the 3-commit architectural simulation test
+uv run python tests/demo_simulation.py
+
+# Run git-context commands
+uv run git-context --help
+uv run git-context diff
+```
 
 ---
 
