@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.8"
 license = { text = "MIT" }
 authors = [
-    { name = "GitContext Team" }
+    { name = "OneOrbit", email = "dev@oneorbit.dev" }
 ]
 classifiers = [
     "Intended Audience :: Developers",
@@ -15,6 +15,10 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 dependencies = []
+
+[project.urls]
+Homepage = "https://oneorbit.dev"
+Repository = "https://github.com/oneorbit/git-context"
 
 [project.scripts]
 git-context = "git_context.cli:main"

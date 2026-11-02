@@ -22,7 +22,7 @@ RULE_FILE_TEMPLATE = """# 🧠 GitContext: AI Architecture Memory
 {recent_history}
 
 ---
-*Maintained automatically by [GitContext](https://github.com/gitcontext/git-context) — Living context for AI pair programming.*
+*Maintained automatically by [GitContext](https://github.com/oneorbit/git-context) by [OneOrbit](https://oneorbit.dev) — Living context for AI pair programming.*
 """
 
 class MemoryStore:

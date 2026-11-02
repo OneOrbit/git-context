@@ -1,6 +1,6 @@
 name: "GitContext: Living AI Codebase Memory"
 description: "Automatically updates .llmrules & .cursorrules from git commits so AI assistants (Cursor, Copilot, Claude Code) follow current conventions."
-author: "GitContext"
+author: "OneOrbit"
 branding:
   icon: "cpu"
   color: "purple"

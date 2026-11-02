@@ -84,7 +84,7 @@ This project uses `uv` exclusively for dependency and workspace management:
 
 ```bash
 # Clone the repository
-git clone https://github.com/gitcontext/git-context.git
+git clone https://github.com/oneorbit/git-context.git
 cd git-context
 
 # Sync dependencies with uv
@@ -124,7 +124,7 @@ jobs:
         with:
           fetch-depth: 2
 
-      - uses: gitcontext/git-context@v1
+      - uses: oneorbit/git-context@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           file: ".llmrules"
@@ -151,7 +151,7 @@ jobs:
 > *Your AI pair programmers (Cursor, Copilot, Claude Code) now have the latest architectural rules for this PR in `.llmrules`.*
 
 ---
-<sub>⚡ Maintained by **[GitContext](https://gitcontext.dev)** — Living AI context for engineering teams. Free for Open Source • $12/mo for Private Orgs.</sub>
+<sub>⚡ Maintained by **[GitContext](https://oneorbit.dev)** by [OneOrbit](https://oneorbit.dev) — Living AI context for engineering teams. Free for Open Source • $12/mo for Private Orgs.</sub>
 ```
 
 ---
@@ -180,4 +180,4 @@ As an engineer, you never have to send a cold email, run ads, or jump on sales d
 
 ## 📄 License
 
-MIT License. Free for open source and personal use.
+MIT License. Free for open source and personal use. Maintained by [OneOrbit](https://oneorbit.dev).

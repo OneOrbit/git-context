@@ -59,7 +59,7 @@ class BillboardGenerator:
             "> *Your AI pair programmers (Cursor, Copilot, Claude Code) now have the latest architectural rules for this PR in `.llmrules`.*",
             "",
             "---",
-            "<sub>⚡ Maintained by **[GitContext](https://gitcontext.dev)** — Living AI context for engineering teams. Free for Open Source • $12/mo for Private Orgs.</sub>"
+            "<sub>⚡ Maintained by **[GitContext](https://oneorbit.dev)** by [OneOrbit](https://oneorbit.dev) — Living AI context for engineering teams. Free for Open Source • $12/mo for Private Orgs.</sub>"
         ])
 
         return "\n".join(lines)
@@ -74,7 +74,7 @@ class BillboardGenerator:
         headers = {
             "Authorization": f"Bearer {self.token}",
             "Accept": "application/vnd.github.v3+json",
-            "User-Agent": "GitContext-Bot"
+            "User-Agent": "GitContext-Bot (OneOrbit)"
         }
 
         # 1. Check for existing comment from bot
